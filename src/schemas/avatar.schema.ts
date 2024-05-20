@@ -5,6 +5,8 @@ import {
 } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
+export type AvatarDocument = Avatar & Document;
+
 @Schema()
 export class Avatar extends Document {
     @Prop({ required: true })

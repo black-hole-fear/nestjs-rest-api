@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { User } from '../schemas/user.schema';
 import { CreateUserDto } from './dto/create-user.dto';
 import axios from 'axios';
 import { RabbitMQService } from '../rabbitmq/rabbitmq.service';
 
+import { Model } from 'mongoose';
+import { User, UserDocument } from '../schemas/user.schema';
+
 @Injectable()
 export class UsersService {
     constructor(
-        @InjectModel(User.name) private userModel: Model<User>,
+        @InjectModel('User') 
+        private userModel: Model<UserDocument>,
         private rabbitMQService: RabbitMQService,
     ) {}
 

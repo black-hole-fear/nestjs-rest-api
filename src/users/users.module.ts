@@ -14,6 +14,7 @@ import { RabbitMQModule } from 'src/rabbitmq/rabbitmq.module';
   ],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [UsersService]
 })
 
 export class UsersModule {}

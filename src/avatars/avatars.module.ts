@@ -11,6 +11,8 @@ import { Avatar, AvatarSchema } from 'src/schemas/avatar.schema';
     )
   ],
   providers: [AvatarsService],
-  controllers: [AvatarsController]
+  controllers: [AvatarsController],
+  exports: [AvatarsService]
 })
+
 export class AvatarsModule {}

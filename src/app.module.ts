@@ -6,6 +6,7 @@ import { AvatarsModule } from './avatars/avatars.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
+import { Avatar, AvatarSchema } from './schemas/avatar.schema';
 
 @Module({
   imports: [
@@ -13,7 +14,11 @@ import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
     MongooseModule.forRoot(process.env.MONGO_URI),
     UsersModule, 
     AvatarsModule,
-    RabbitMQModule
+    RabbitMQModule,
+
+    MongooseModule.forFeature(
+      [{ name: Avatar.name, schema: AvatarSchema }]
+    )
   ],
   controllers: [AppController],
   providers: [AppService],

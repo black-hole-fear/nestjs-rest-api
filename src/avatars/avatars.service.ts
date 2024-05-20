@@ -6,13 +6,13 @@ import * as crypto from 'crypto';
 import { join } from 'path';
 
 import { Model } from 'mongoose';
-import { Avatar } from 'src/schemas/avatar.schema';
+import { Avatar, AvatarDocument } from '../schemas/avatar.schema';
 
 @Injectable()
 export class AvatarsService {
     constructor(
         @InjectModel(Avatar.name) 
-        private avatarModel: Model<Avatar>
+        private avatarModel: Model<AvatarDocument>
     ) {}
 
     async getAvatar(userId: string) {
