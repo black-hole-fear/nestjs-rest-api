@@ -73,17 +73,15 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t your_dockerhub_username/rest-api .
-        docker tag your_dockerhub_username/rest-api your_dockerhub_username/rest-api:latest
-        docker push your_dockerhub_username/rest-api:latest
+        docker compose down
+        docker compose up --build
 
     - name: Deploy to your server
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       run: |
         ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no user@your_server_ip << 'EOF'
-          docker pull your_dockerhub_username/rest-api:latest
-          docker stop rest-api || true
-          docker rm rest-api || true
+          docker pull
+          docker stop
           docker run -d --name rest-api -p 3000:3000 your_dockerhub_username/rest-api:latest
         EOF
