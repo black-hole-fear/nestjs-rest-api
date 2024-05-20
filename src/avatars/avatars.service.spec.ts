@@ -9,8 +9,10 @@ describe('AvatarsService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        MongooseModule.forRoot('mongodb://localhost/nest'),
-        MongooseModule.forFeature([{ name: Avatar.name, schema: AvatarSchema }])
+        MongooseModule.forRoot('mongodb://localhost:27017/nest'),
+        MongooseModule.forFeature([
+          { name: Avatar.name, schema: AvatarSchema },
+        ]),
       ],
       providers: [AvatarsService],
     }).compile();

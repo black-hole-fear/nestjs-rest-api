@@ -13,7 +13,7 @@ describe('AppController (e2e)', () => {
       imports: [
         AppModule,
         ConfigModule.forRoot(),
-        MongooseModule.forRoot("mongod://localhost:27017/nest")
+        MongooseModule.forRoot('mongod://localhost:27017/nest'),
       ],
     }).compile();
 
@@ -25,16 +25,14 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!')
-      .timeout(4000);
+      .expect('Hello World!');
   });
 
   it('/api/users (POST)', () => {
     return request(app.getHttpServer())
       .post('/api/users')
       .send({ name: 'Test User', job: 'Developer' })
-      .expect(201)
-      .timeout(5000)
+      .expect(201);
   });
 
   it('GET api/users/:userId', () => {
@@ -43,8 +41,8 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect((res) => {
         expect(res.body).toHaveProperty('id', 1);
-    });
-  })
+      });
+  });
 
   it('/GET api/user/:userId/avatar', async () => {
     const res = await request(app.getHttpServer())
@@ -63,5 +61,5 @@ describe('AppController (e2e)', () => {
 
   afterAll(async () => {
     await app.close();
-  })
+  });
 });

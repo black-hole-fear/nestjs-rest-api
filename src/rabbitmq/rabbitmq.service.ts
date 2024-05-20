@@ -7,7 +7,7 @@ export class RabbitMQService {
   private channel: amqp.Channel;
 
   async onModuleInit() {
-    this.connection = await amqp.connect('amqp://localhost');
+    this.connection = await amqp.connect(process.env.RABBIT_MQ);
     this.channel = await this.connection.createChannel();
   }
 

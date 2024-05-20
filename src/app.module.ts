@@ -10,8 +10,8 @@ import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost:27017/nest'),
-    UsersModule, 
+    MongooseModule.forRoot('mongodb://localhost/nest'),
+    UsersModule,
     AvatarsModule,
     RabbitMQModule,
   ],

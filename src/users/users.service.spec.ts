@@ -3,7 +3,6 @@ import { UsersService } from './users.service';
 import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { User, UserSchema } from '../schemas/user.schema';
 import { RabbitMQService } from '../rabbitmq/rabbitmq.service';
-import { Model } from 'mongoose';
 
 const mockUserModel = {
   create: jest.fn(),
@@ -20,8 +19,8 @@ describe('UsersService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
-        MongooseModule.forRoot('mongodb://localhost/nest'),
-        MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])
+        MongooseModule.forRoot('mongodb://localhost:27017/nest'),
+        MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
       ],
       providers: [
         UsersService,
