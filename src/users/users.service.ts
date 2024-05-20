@@ -11,7 +11,7 @@ import { User, UserDocument } from '../schemas/user.schema';
 export class UsersService {
     constructor(
         @InjectModel('User') 
-        private userModel: Model<UserDocument>,
+        private readonly userModel: Model<UserDocument>,
         private rabbitMQService: RabbitMQService,
     ) {}
 
@@ -23,7 +23,7 @@ export class UsersService {
         console.log('Sending email to user...');
 
         // Send RabbitMQ event
-        await this.rabbitMQService.send('user_created', savedUser);
+        await this.rabbitMQService.sendToQueue('user_created', 'hello');
 
         return savedUser;
     }

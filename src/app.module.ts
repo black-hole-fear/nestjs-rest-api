@@ -6,19 +6,14 @@ import { AvatarsModule } from './avatars/avatars.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
-import { Avatar, AvatarSchema } from './schemas/avatar.schema';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.MONGO_URI),
+    MongooseModule.forRoot('mongodb://localhost:27017/nest'),
     UsersModule, 
     AvatarsModule,
     RabbitMQModule,
-
-    MongooseModule.forFeature(
-      [{ name: Avatar.name, schema: AvatarSchema }]
-    )
   ],
   controllers: [AppController],
   providers: [AppService],

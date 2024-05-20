@@ -40,5 +40,6 @@ export class AvatarsService {
                 fs.unlinkSync(filePath);
             }
         }
+        return { message: 'Avatar deleted successfully' };
     }
 }

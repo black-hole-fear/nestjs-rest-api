@@ -2,8 +2,8 @@ import { IsString } from "class-validator";
 
 export class CreateUserDto {
     @IsString()
-    readonly name: string;
+    name: string;
 
     @IsString()
-    readonly job: string;
+    job: string;
 }
