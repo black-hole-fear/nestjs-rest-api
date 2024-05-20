@@ -1,0 +1,89 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_requests:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo:
+        image: mongo:4.4
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand('ping')'" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+      rabbitmq:
+        image: rabbitmq:3.7-management
+        ports:
+          - 5672:5672
+          - 15672:15672
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build
+
+    - name: Run unit tests
+      run: npm run test
+
+    - name: Run e2e tests
+      run: npm run test:e2e
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project
+      run: npm run build
+
+    - name: Log in to Docker Hub
+      run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+
+    - name: Build and push Docker image
+      run: |
+        docker build -t your_dockerhub_username/rest-api .
+        docker tag your_dockerhub_username/rest-api your_dockerhub_username/rest-api:latest
+        docker push your_dockerhub_username/rest-api:latest
+
+    - name: Deploy to your server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no user@your_server_ip << 'EOF'
+          docker pull your_dockerhub_username/rest-api:latest
+          docker stop rest-api || true
+          docker rm rest-api || true
+          docker run -d --name rest-api -p 3000:3000 your_dockerhub_username/rest-api:latest
+        EOF
