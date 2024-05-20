@@ -12,7 +12,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "prepare": "husky",
+    "prepare": "husky install",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch",
@@ -91,7 +91,7 @@
     "*.{json,md}": [
       "prettier --write"
     ],
-    "*.{js}": [
+    "*.js": [
       "eslint --fix",
       "prettier --write"
     ]
