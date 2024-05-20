@@ -3,46 +3,47 @@ Here is a comprehensive `README.md` file for your NestJS project, including desc
 ```markdown
 # NestJS Backend API
 
-
 # To get started this project
+
 sudo docker compose up
-pnpm start
+pnpm
 
 ## Project Description
 
 This project is a RESTful API built with NestJS. It includes user management, authentication, and integration with RabbitMQ for messaging.
 
 ## Project Structure
-
 ```
+
 .
 ├── src
-│   ├── app.module.ts             # Root module of the application
-│   ├── main.ts                   # Entry point of the application
-│   ├── users
-│   │   ├── users.controller.ts   # Controller for user-related routes
-│   │   ├── users.service.ts      # Service for user-related business logic
-│   │   ├── users.module.ts       # Module for user-related components
-│   │   ├── dto                   # Data Transfer Objects for users
-│   │   │   ├── create-user.dto.ts
-│   │   │   └── update-user.dto.ts
-│   ├── schemas
-│   │   ├── user.schema.ts        # Mongoose schema for User model
-│   ├── rabbitmq
-│   │   ├── rabbitmq.module.ts    # Module for RabbitMQ integration
-│   │   ├── rabbitmq.service.ts   # Service for RabbitMQ messaging logic
-│   ├── config
-│   │   └── configuration.ts      # Configuration settings
+│ ├── app.module.ts # Root module of the application
+│ ├── main.ts # Entry point of the application
+│ ├── users
+│ │ ├── users.controller.ts # Controller for user-related routes
+│ │ ├── users.service.ts # Service for user-related business logic
+│ │ ├── users.module.ts # Module for user-related components
+│ │ ├── dto # Data Transfer Objects for users
+│ │ │ ├── create-user.dto.ts
+│ │ │ └── update-user.dto.ts
+│ ├── schemas
+│ │ ├── user.schema.ts # Mongoose schema for User model
+│ ├── rabbitmq
+│ │ ├── rabbitmq.module.ts # Module for RabbitMQ integration
+│ │ ├── rabbitmq.service.ts # Service for RabbitMQ messaging logic
+│ ├── config
+│ │ └── configuration.ts # Configuration settings
 ├── test
-│   ├── app.e2e-spec.ts           # End-to-end test for the application
-│   ├── jest-e2e.json             # Jest configuration for e2e tests
-├── .dockerignore                 # Files and directories to ignore in Docker build
-├── Dockerfile                    # Dockerfile for building the application image
-├── docker-compose.yml            # Docker Compose configuration
-├── jest.config.js                # Jest configuration for unit tests
-├── package.json                  # Project dependencies and scripts
-└── tsconfig.json                 # TypeScript configuration
-```
+│ ├── app.e2e-spec.ts # End-to-end test for the application
+│ ├── jest-e2e.json # Jest configuration for e2e tests
+├── .dockerignore # Files and directories to ignore in Docker build
+├── Dockerfile # Dockerfile for building the application image
+├── docker-compose.yml # Docker Compose configuration
+├── jest.config.js # Jest configuration for unit tests
+├── package.json # Project dependencies and scripts
+└── tsconfig.json # TypeScript configuration
+
+````
 
 ## Prerequisites
 
@@ -104,11 +105,12 @@ This project is a RESTful API built with NestJS. It includes user management, au
 Run the unit tests using Jest:
 ```bash
 pnpm test
-```
+````
 
 ### End-to-End Tests
 
 Run the end-to-end tests:
+
 ```bash
 pnpm test:e2e
 ```
@@ -116,24 +118,27 @@ pnpm test:e2e
 ## Docker Commands
 
 - **Build and start containers**:
-    ```bash
-    sudo docker-compose up --build
-    ```
+
+  ```bash
+  sudo docker-compose up --build
+  ```
 
 - **Stop containers**:
-    ```bash
-    sudo docker-compose down
-    ```
+
+  ```bash
+  sudo docker-compose down
+  ```
 
 - **View logs**:
-    ```bash
-    sudo docker-compose logs
-    ```
+
+  ```bash
+  sudo docker-compose logs
+  ```
 
 - **Rebuild containers**:
-    ```bash
-    sudo docker-compose up --build --force-recreate
-    ```
+  ```bash
+  sudo docker-compose up --build --force-recreate
+  ```
 
 ## Additional Information
 
@@ -144,6 +149,8 @@ pnpm test:e2e
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ```
 
 This `README.md` provides an overview of your project structure, installation steps, instructions for running the application with and without Docker, testing commands, and Docker-specific commands for managing containers.
+```
