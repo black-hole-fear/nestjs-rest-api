@@ -1,73 +1,149 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+Here is a comprehensive `README.md` file for your NestJS project, including descriptions of all files, setup instructions, and Docker commands:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+```markdown
+# NestJS Backend API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# To get started this project
+sudo docker compose up
+pnpm start
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Project Description
+
+This project is a RESTful API built with NestJS. It includes user management, authentication, and integration with RabbitMQ for messaging.
+
+## Project Structure
+
+```
+.
+├── src
+│   ├── app.module.ts             # Root module of the application
+│   ├── main.ts                   # Entry point of the application
+│   ├── users
+│   │   ├── users.controller.ts   # Controller for user-related routes
+│   │   ├── users.service.ts      # Service for user-related business logic
+│   │   ├── users.module.ts       # Module for user-related components
+│   │   ├── dto                   # Data Transfer Objects for users
+│   │   │   ├── create-user.dto.ts
+│   │   │   └── update-user.dto.ts
+│   ├── schemas
+│   │   ├── user.schema.ts        # Mongoose schema for User model
+│   ├── rabbitmq
+│   │   ├── rabbitmq.module.ts    # Module for RabbitMQ integration
+│   │   ├── rabbitmq.service.ts   # Service for RabbitMQ messaging logic
+│   ├── config
+│   │   └── configuration.ts      # Configuration settings
+├── test
+│   ├── app.e2e-spec.ts           # End-to-end test for the application
+│   ├── jest-e2e.json             # Jest configuration for e2e tests
+├── .dockerignore                 # Files and directories to ignore in Docker build
+├── Dockerfile                    # Dockerfile for building the application image
+├── docker-compose.yml            # Docker Compose configuration
+├── jest.config.js                # Jest configuration for unit tests
+├── package.json                  # Project dependencies and scripts
+└── tsconfig.json                 # TypeScript configuration
+```
+
+## Prerequisites
+
+- Node.js (v14 or later)
+- npm (v6 or later)
+- Docker
+- Docker Compose
 
 ## Installation
 
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/yourusername/your-repo-name.git
+    cd your-repo-name
+    ```
+
+2. **Install dependencies**:
+    ```bash
+    npm install pnpm
+    pnpm install
+    ```
+
+3. **Set up environment variables**:
+    Create a `.env` file in the root of your project and add the following:
+    ```env
+    MONGO_URI=mongodb://localhost:27017/nest
+    RABBITMQ_URI=amqp://localhost:5672
+    ```
+
+## Running the Application
+
+### Using Docker
+
+1. **Build and start the containers**:
+    ```bash
+    sudo docker-compose up --build
+    ```
+
+2. **Access the application**:
+    The API will be available at `http://localhost:3000`.
+
+### Without Docker
+
+1. **Start MongoDB and RabbitMQ**:
+    Ensure MongoDB and RabbitMQ are running on your local machine.
+
+2. **Start the application**:
+    ```bash
+    npm run start:dev
+    ```
+
+3. **Access the application**:
+    The API will be available at `http://localhost:3000`.
+
+## Running Tests
+
+### Unit Tests
+
+Run the unit tests using Jest:
 ```bash
-$ pnpm install
+pnpm test
 ```
 
-## Running the app
+### End-to-End Tests
 
+Run the end-to-end tests:
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+pnpm test:e2e
 ```
 
-## Test
+## Docker Commands
 
-```bash
-# unit tests
-$ pnpm run test
+- **Build and start containers**:
+    ```bash
+    sudo docker-compose up --build
+    ```
 
-# e2e tests
-$ pnpm run test:e2e
+- **Stop containers**:
+    ```bash
+    sudo docker-compose down
+    ```
 
-# test coverage
-$ pnpm run test:cov
-```
+- **View logs**:
+    ```bash
+    sudo docker-compose logs
+    ```
 
-## Support
+- **Rebuild containers**:
+    ```bash
+    sudo docker-compose up --build --force-recreate
+    ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Additional Information
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- **NestJS Documentation**: [https://docs.nestjs.com](https://docs.nestjs.com)
+- **Docker Documentation**: [https://docs.docker.com](https://docs.docker.com)
+- **Jest Documentation**: [https://jestjs.io/docs/en/getting-started](https://jestjs.io/docs/en/getting-started)
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
+
+This `README.md` provides an overview of your project structure, installation steps, instructions for running the application with and without Docker, testing commands, and Docker-specific commands for managing containers.
