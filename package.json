@@ -12,7 +12,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "prepare": "husky install",
+    "prepare": "husky",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --detectOpenHandles",
     "test:watch": "jest --watch",
@@ -84,10 +84,16 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
+    "*.{ts,tsx}": [
       "eslint --fix",
-      "npm test -- --findRelatedTests",
-      "git add"
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.{js}": [
+      "eslint --fix",
+      "prettier --write"
     ]
   }
 }
