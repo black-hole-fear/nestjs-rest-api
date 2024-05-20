@@ -5,13 +5,15 @@ import { UsersModule } from './users/users.module';
 import { AvatarsModule } from './avatars/avatars.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { RabbitMQModule } from './rabbitmq/rabbitmq.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URI),
     UsersModule, 
-    AvatarsModule
+    AvatarsModule,
+    RabbitMQModule
   ],
   controllers: [AppController],
   providers: [AppService],
