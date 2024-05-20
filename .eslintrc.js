@@ -7,11 +7,14 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
+    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
   root: true,
   env: {
+    browswer: true,
+    es2021: true,
     node: true,
     jest: true,
   },
