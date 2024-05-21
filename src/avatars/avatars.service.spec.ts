@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AvatarsService } from './avatars.service';
-import { MongooseModule } from '@nestjs/mongoose';
+import { MongooseModule, getModelToken } from '@nestjs/mongoose';
 import { Avatar, AvatarSchema } from '../schemas/avatar.schema';
 
 describe('AvatarsService', () => {
@@ -14,7 +14,17 @@ describe('AvatarsService', () => {
           { name: Avatar.name, schema: AvatarSchema },
         ]),
       ],
-      providers: [AvatarsService],
+      providers: [
+        AvatarsService,
+        {
+          provide: getModelToken(Avatar.name),
+          useValue: {
+            findOne: jest.fn(),
+            findOneAndDelete: jest.fn(),
+            save: jest.fn(),
+          },
+        },
+      ],
     }).compile();
 
     service = module.get<AvatarsService>(AvatarsService);
