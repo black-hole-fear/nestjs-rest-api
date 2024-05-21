@@ -3,10 +3,8 @@ import * as amqp from 'amqplib';
 
 @Injectable()
 export class RabbitMQService {
-  constructor(
-    private connection: amqp.Connection,
-    private channel: amqp.Channel,
-  ) {}
+  private connection: amqp.Connection;
+  private channel: amqp.Channel;
 
   async onModuleInit() {
     this.connection = await amqp.connect(process.env.RABBIT_MQ);
