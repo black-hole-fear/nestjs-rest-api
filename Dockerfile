@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:20.9.0 as builder
+FROM node:16.9.0 as builder
 
 WORKDIR /usr/src/app
 
@@ -9,6 +9,9 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Print Node.js version for verification
+RUN node --version
+
 # Copy the rest of the application source code
 COPY . .
 
@@ -16,7 +19,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Create the runtime image
-FROM node:20.9.0-alpine
+FROM node:16.9.0-alpine
 
 WORKDIR /usr/src/app
 
@@ -26,6 +29,9 @@ COPY --from=builder /usr/src/app/package*.json ./
 
 # Install only production dependencies
 RUN npm install --only=production
+
+# Print Node.js version for verification
+RUN node --version
 
 # Expose the port the app runs on
 EXPOSE 3000
