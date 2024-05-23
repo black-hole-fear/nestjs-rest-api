@@ -1,5 +1,5 @@
 # Stage 1: Build the application
-FROM node:14 as builder
+FROM node:16 as builder
 
 WORKDIR /usr/src/app
 
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Create the runtime image
-FROM node:14-alpine
+FROM node:16-alpine
 
 WORKDIR /usr/src/app
 
