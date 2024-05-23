@@ -1,13 +1,12 @@
-version: "3.8"
+version: '3.8'
 
 services:
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    environment:
-      - MONGO_URI=mongodb://mongodb:27017/nest
-      - RABBITMQ_URI=amqp://rabbitmq:5672
     depends_on:
       - mongodb
       - rabbitmq
@@ -18,7 +17,7 @@ services:
       - "27017:27017"
 
   rabbitmq:
-    image: rabbitmq:3-management
+    image: rabbitmq:management
     ports:
       - "5672:5672"
       - "15672:15672"
